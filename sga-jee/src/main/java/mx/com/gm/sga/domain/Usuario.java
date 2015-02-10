@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_usuario")
-	private int idUsuario;
+	private Long idUsuario;
 
 	private String username;
 	
@@ -32,11 +32,11 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
     
-    public Usuario(int idUsuario) {
+    public Usuario(Long idUsuario) {
     	this.idUsuario = idUsuario;
     }
 
-	public Usuario(int idUsuario, String password, String username,
+	public Usuario(Long idUsuario, String password, String username,
 			Persona persona) {
 		this.idUsuario = idUsuario;
 		this.username = username;
@@ -56,11 +56,11 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
-	public int getIdUsuario() {
+	public Long getIdUsuario() {
 		return this.idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -92,7 +92,7 @@ public class Usuario implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idUsuario;
+		result = (int) (prime * result + idUsuario);
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((persona == null) ? 0 : persona.hashCode());

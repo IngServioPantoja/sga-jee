@@ -14,6 +14,9 @@ public interface PersonaServiceWS {
 	public List<Persona> listarPersonas();
 	
 	@WebMethod
+	public List<Persona> listarPersonasWS();
+	
+	@WebMethod
 	public void registrarPersona(Persona persona);
 	
 	@WebMethod

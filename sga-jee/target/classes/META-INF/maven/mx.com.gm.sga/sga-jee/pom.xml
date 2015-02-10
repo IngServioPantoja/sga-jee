@@ -11,6 +11,12 @@
 			B:\Desarrollo Java\Servidores\GlassFish4\glassfish-4.1\glassfish\lib\embedded\glassfish-embedded-static-shell.jar
 		</glassfish.embedded-static-shell.jar>
 	</properties>
+	<repositories>
+		<repository>
+			<id>JBoss repository</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.glassfish.extras</groupId>
@@ -55,11 +61,20 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.5.6</version>
 		</dependency>
-		<!-- concrete Log4J Implementation for SLF4J API -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>2.2.1.GA</version>
 		</dependency>
 	</dependencies>
 	<pluginRepositories>

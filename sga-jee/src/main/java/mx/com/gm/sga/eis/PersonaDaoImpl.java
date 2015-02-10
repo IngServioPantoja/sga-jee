@@ -1,6 +1,7 @@
 package mx.com.gm.sga.eis;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -21,7 +22,12 @@ public class PersonaDaoImpl implements PersonaDao, Serializable{
 	@SuppressWarnings("unchecked")
 	public List<Persona> findAllPersonas() {
 		List<Persona> lstPersonas = em.createNamedQuery("Persona.findAll").getResultList();
-		return lstPersonas;
+		if(lstPersonas.size()>0){
+			return lstPersonas;
+		}else{
+			return new ArrayList<Persona>();
+		}
+		
 	}
 
 	public Persona findPersonaById(Persona persona) {

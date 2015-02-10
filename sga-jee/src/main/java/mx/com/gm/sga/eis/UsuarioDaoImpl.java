@@ -1,12 +1,17 @@
 package mx.com.gm.sga.eis;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import mx.com.gm.sga.domain.Persona;
 import mx.com.gm.sga.domain.Usuario;
 
 @Stateless
@@ -45,6 +50,36 @@ public class UsuarioDaoImpl implements UsuarioDao, Serializable {
 	public void deleteUsuario(Usuario usuario) {
 		em.merge(usuario);
 		em.remove( usuario );
+	}
+	
+	public Usuario iniciarSesion(String usuario, String contrasena)throws SQLException{
+		Query query = em.createQuery("FROM Usuario u WHERE u.username = :username AND u.password = :password");
+		query.setParameter("username", usuario);
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		
+	    md.update(contrasena.getBytes());
+
+	    byte byteData[] = md.digest();
+
+	    StringBuffer sb = new StringBuffer();
+	    for (int i = 0; i < byteData.length; i++)
+	        sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+
+	    System.out.println("Digest(in hex format):: " + sb.toString());
+		query.setParameter("password", sb.toString());
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Usuario usuarioLogueado = (Usuario) query.getSingleResult();
+		if(usuarioLogueado.getIdUsuario()!=null){
+			return usuarioLogueado;
+		}else{
+			return null;
+		}
+		
 	}
 
 }
