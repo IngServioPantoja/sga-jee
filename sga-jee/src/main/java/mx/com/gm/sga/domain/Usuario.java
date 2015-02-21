@@ -1,8 +1,13 @@
 package mx.com.gm.sga.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 
@@ -28,6 +33,11 @@ public class Usuario implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_persona")
 	private Persona persona;
+	
+	@XmlTransient
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@OneToMany(mappedBy = "usuario", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
+	private Set<UsuarioGrupo> usuariosGrupos;
 
     public Usuario() {
     }
@@ -86,6 +96,14 @@ public class Usuario implements Serializable {
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	public Set<UsuarioGrupo> getUsuariosGrupos() {
+		return usuariosGrupos;
+	}
+
+	public void setUsuariosGrupos(Set<UsuarioGrupo> usuariosGrupos) {
+		this.usuariosGrupos = usuariosGrupos;
 	}
 
 	@Override

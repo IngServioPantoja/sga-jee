@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import mx.com.gm.sga.domain.Persona;
 import mx.com.gm.sga.domain.Usuario;
 
 @Stateless

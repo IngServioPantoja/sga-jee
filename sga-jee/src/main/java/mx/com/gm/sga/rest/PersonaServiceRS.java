@@ -24,6 +24,7 @@ import mx.com.gm.sga.domain.Usuario;
 import mx.com.gm.sga.eis.PersonaDao;
 import mx.com.gm.sga.servicio.PersonaService;
 import mx.com.gm.sga.servicio.UsuarioService;
+import mx.com.gm.sga.utils.Account;
 
 @Path("/personas")
 @Stateless
@@ -40,61 +41,62 @@ public class PersonaServiceRS implements Serializable{
 	@EJB
 	private PersonaService personaService;
 	
-	@GET
-	@Produces("application/xml")
-	public List<Persona> listarPersonas(){
-		return personaService.listarPersonas();
-	}
-	
-	@GET
-	@Produces("application/xml")
-	@Path("{id}") //hace referencia a /personas/{id}
-	public Persona encontrarPersonaPorId(@PathParam("id") int id){
-		return personaService.encontrarPersonaPorId(new Persona (id));
-	}
-	
 	@POST
 	@Produces("application/xml")
 	@Consumes("application/xml")
-	public Response agregarPersona(Persona persona){
-		try{
-			personaService.registrarPersona(persona);
-			return Response.ok().entity(persona).build();
-		}catch(Exception e){
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		}
+	public List<Persona> listarPersonasWS(Account cuenta){
+		return personaService.listarPersonasWS(cuenta);
 	}
-	
-	@PUT
-	@Produces("application/xml")
-	@Consumes("application/xml")
-	@Path("{id}")
-	public Response modificarPersona(@PathParam("id") int id, Persona personaModificada){
-		try{
-			Persona persona = personaService.encontrarPersonaPorId(new Persona(id));
-			if(persona != null){
-				personaService.modificarPersona(personaModificada);
-				return Response.ok().entity(personaModificada).build();
-			}
-			else{
-				return Response.status(Status.NOT_FOUND).build();
-			}
-			
-		}catch(Exception e){
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-		}
-	}
-	
-	@DELETE
-	@Path("{id}")
-	public Response eliminarPersonaPorId(@PathParam("id") int id){
-		try{
-			personaService.eliminarPersona(new Persona(id));
-			return Response.ok().build();
-		}
-		catch(Exception e){
-			return Response.status(404).build();
-		}
-	}
+//	
+//	@GET
+//	@Produces("application/xml")
+//	@Path("{id}") //hace referencia a /personas/{id}
+//	public Persona encontrarPersonaPorId(@PathParam("id") int id){
+//		return personaService.encontrarPersonaPorId(new Persona (id));
+//	}
+//	
+//	@POST
+//	@Produces("application/xml")
+//	@Consumes("application/xml")
+//	public Response agregarPersona(Persona persona){
+//		try{
+//			personaService.registrarPersona(persona);
+//			return Response.ok().entity(persona).build();
+//		}catch(Exception e){
+//			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+//		}
+//	}
+//	
+//	@PUT
+//	@Produces("application/xml")
+//	@Consumes("application/xml")
+//	@Path("{id}")
+//	public Response modificarPersona(@PathParam("id") int id, Persona personaModificada){
+//		try{
+//			Persona persona = personaService.encontrarPersonaPorId(new Persona(id));
+//			if(persona != null){
+//				personaService.modificarPersona(personaModificada);
+//				return Response.ok().entity(personaModificada).build();
+//			}
+//			else{
+//				return Response.status(Status.NOT_FOUND).build();
+//			}
+//			
+//		}catch(Exception e){
+//			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+//		}
+//	}
+//	
+//	@DELETE
+//	@Path("{id}")
+//	public Response eliminarPersonaPorId(@PathParam("id") int id){
+//		try{
+//			personaService.eliminarPersona(new Persona(id));
+//			return Response.ok().build();
+//		}
+//		catch(Exception e){
+//			return Response.status(404).build();
+//		}
+//	}
 
 }
