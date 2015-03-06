@@ -5,11 +5,16 @@
 	<persistence-unit name="PersonaPU" transaction-type="JTA">
 		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 		<jta-data-source>jdbc/PersonaDb</jta-data-source>
-		<class>mx.com.gm.sga.domain.Persona</class>
-		<class>mx.com.gm.sga.domain.Usuario</class>
 		<class>mx.com.gm.sga.domain.Grupo</class>
-		<class>mx.com.gm.sga.domain.UsuarioGrupo</class>
+		<class>mx.com.gm.sga.domain.Modulo</class>
+		<class>mx.com.gm.sga.domain.ModuloOpcion</class>
+		<class>mx.com.gm.sga.domain.ParametroPersona</class>
+		<class>mx.com.gm.sga.domain.Persona</class>
+		<class>mx.com.gm.sga.domain.TipoParametroPersona</class>
 		<class>mx.com.gm.sga.domain.Rol</class>
+		<class>mx.com.gm.sga.domain.RolModuloOpcion</class>
+		<class>mx.com.gm.sga.domain.Usuario</class>
+		<class>mx.com.gm.sga.domain.UsuarioGrupo</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.query.factory_class" value="org.hibernate.hql.classic.ClassicQueryTranslatorFactory"/>   
