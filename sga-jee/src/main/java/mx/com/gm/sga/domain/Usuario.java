@@ -1,7 +1,7 @@
 package mx.com.gm.sga.domain;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
@@ -16,6 +16,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  * 
  */
 @Entity
+@Table(name="usuario")
 @NamedQueries( { @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u ORDER BY u.idUsuario") })
 public class Usuario implements Serializable {
 
@@ -37,7 +38,11 @@ public class Usuario implements Serializable {
 	@XmlTransient
 	@LazyCollection(LazyCollectionOption.EXTRA)
 	@OneToMany(mappedBy = "usuario", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
-	private Set<UsuarioGrupo> usuariosGrupos;
+	private List<UsuarioGrupo> usuariosGrupos;
+	
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@OneToMany(mappedBy = "usuario", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
+	private List<UsuarioRol> usuarioRoles;
 
     public Usuario() {
     }
@@ -97,13 +102,22 @@ public class Usuario implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+	
 
-	public Set<UsuarioGrupo> getUsuariosGrupos() {
+	public List<UsuarioGrupo> getUsuariosGrupos() {
 		return usuariosGrupos;
 	}
 
-	public void setUsuariosGrupos(Set<UsuarioGrupo> usuariosGrupos) {
+	public void setUsuariosGrupos(List<UsuarioGrupo> usuariosGrupos) {
 		this.usuariosGrupos = usuariosGrupos;
+	}
+	
+	public List<UsuarioRol> getUsuarioRoles() {
+		return usuarioRoles;
+	}
+
+	public void setUsuarioRoles(List<UsuarioRol> usuarioRoles) {
+		this.usuarioRoles = usuarioRoles;
 	}
 
 	@Override

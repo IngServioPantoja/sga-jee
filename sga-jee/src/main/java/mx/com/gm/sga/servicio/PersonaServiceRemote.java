@@ -1,7 +1,10 @@
 package mx.com.gm.sga.servicio;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import javax.ejb.Remote;
+
 import mx.com.gm.sga.domain.Persona;
 
 @Remote
@@ -17,6 +20,6 @@ public interface PersonaServiceRemote {
 
 	public void modificarPersona(Persona persona);
 
-	public void eliminarPersona(Persona persona);
+	public void eliminarPersona(Persona persona) throws SQLException;
 
 }

@@ -18,7 +18,7 @@ public class PersonaServiceTest {
 		personaService = (PersonaService) contenedor.getContext().lookup("java:global/classes/PersonaServiceImpl!mx.com.gm.sga.servicio.PersonaService");
 	}
 
-	//@Test
+	@Test
 	public void testEJBPersonaService() {
 		System.out.println("Iniciando test EJB PersonaService");
 		

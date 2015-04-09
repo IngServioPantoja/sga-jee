@@ -52,7 +52,10 @@ public class UsuarioDaoImpl implements UsuarioDao, Serializable {
 	}
 	
 	public Usuario iniciarSesion(String usuario, String contrasena)throws SQLException{
-		Query query = em.createQuery("FROM Usuario u WHERE u.username = :username AND u.password = :password");
+		Query query = em.createQuery("FROM Usuario u "
+		+ "LEFT JOIN FETCH u.usuarioRoles as uuR "
+		+ "LEFT JOIN FETCH uuR.rol as uuRr "
+		+ "WHERE u.username = :username AND u.password = :password");
 		query.setParameter("username", usuario);
 		MessageDigest md;
 		try {

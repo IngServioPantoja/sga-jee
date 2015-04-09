@@ -7,23 +7,13 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import mx.com.gm.sga.domain.Persona;
-import mx.com.gm.sga.domain.Usuario;
-import mx.com.gm.sga.eis.PersonaDao;
 import mx.com.gm.sga.servicio.PersonaService;
-import mx.com.gm.sga.servicio.UsuarioService;
 import mx.com.gm.sga.utils.Account;
 
 @Path("/personas")

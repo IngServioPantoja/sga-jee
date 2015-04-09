@@ -1,11 +1,13 @@
 package mx.com.gm.sga.eis;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -38,6 +40,19 @@ public class PersonaDaoImpl implements PersonaDao, Serializable{
 		Query query = em.createQuery("from Persona p where p.email = :email");
 		query.setParameter("email", persona.getEmail());
 		return (Persona) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unused")
+	public boolean encontrarCedula(String cedula)throws SQLException{
+		
+		 try{
+		 	Query query = em.createQuery("from Persona p where p.identificacion = :identificacion");
+			query.setParameter("identificacion", cedula);
+			Persona persona = (Persona) query.getSingleResult();
+			return true;
+	    } catch(NoResultException e) {
+	        return false;
+	    }
 	}
 
 	public void insertPersona(Persona persona) {

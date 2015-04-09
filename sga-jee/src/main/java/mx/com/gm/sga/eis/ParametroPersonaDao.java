@@ -12,6 +12,8 @@ public interface ParametroPersonaDao extends Serializable {
 	public List<ParametroPersona> findAll()throws SQLException;
 
 	public ParametroPersona findById(ParametroPersona parametroPersona)throws SQLException;
+	
+	public List<ParametroPersona> findByTipo(Long idTipo)throws SQLException;
 
 	public void persist(ParametroPersona parametroPersona)throws SQLException;
 

@@ -22,10 +22,10 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="B:/Desarrollo Java/Servidores/GlassFish4/glassfish-4.1/glassfish/modules/security.jar"/>
 	<classpathentry kind="lib" path="B:/Desarrollo Java/Servidores/GlassFish4/glassfish-4.1/glassfish/modules/auto-depends.jar"/>
-	<classpathentry kind="lib" path="B:/Desarrollo Java/Servidores/GlassFish4/glassfish-4.1/glassfish/modules/gf-client-module.jar"/>
+	<classpathentry kind="lib" path="B:/Desarrollo Java/Servidores/GlassFish4/glassfish-4.1/glassfish/modules/gf-client-module.jar" sourcepath="C:/Users/ServioAndres/.m2/repository/org/glassfish/main/ejb/ejb-container/4.1/ejb-container-4.1-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>

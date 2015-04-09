@@ -1,5 +1,6 @@
 package mx.com.gm.sga.servicio;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.jws.WebMethod;

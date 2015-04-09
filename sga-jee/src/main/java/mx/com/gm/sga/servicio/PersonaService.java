@@ -1,5 +1,6 @@
 package mx.com.gm.sga.servicio;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -13,6 +14,8 @@ public interface PersonaService {
 	public List<Persona> listarPersonas();
 	
 	public List<Persona> listarPersonasWS(Account cuenta);
+
+	public boolean encontrarCedula(String cedula) throws SQLException;
 	
 	public Persona encontrarPersonaPorId(Persona persona);
 	
@@ -22,5 +25,5 @@ public interface PersonaService {
 
 	public void modificarPersona(Persona persona);
 
-	public void eliminarPersona(Persona persona);
+	public void eliminarPersona(Persona persona)throws SQLException;
 }

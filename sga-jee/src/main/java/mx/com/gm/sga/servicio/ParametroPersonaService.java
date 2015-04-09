@@ -1,24 +1,25 @@
 package mx.com.gm.sga.servicio;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Local;
 
-import mx.com.gm.sga.domain.Modulo;
+import mx.com.gm.sga.domain.ParametroPersona;
 
 @Local
 public interface ParametroPersonaService extends Serializable {
 	
-	public List<Modulo> findAll();
+	public List<ParametroPersona> findAll()throws SQLException;
 	
-	public Modulo findById(Modulo modulo);
+	public ParametroPersona findById(ParametroPersona parametroPersona)throws SQLException;
 	
-	public List<Modulo> findByPadre(Modulo modulo);
+	public List<ParametroPersona> findByTipo(Long idTipo)throws SQLException;
+	
+	public void persist(ParametroPersona parametroPersona)throws SQLException;
 
-	public void persist(Modulo modulo);
+	public void merge(ParametroPersona parametroPersona)throws SQLException;
 
-	public void merge(Modulo modulo);
-
-	public void delete(Modulo modulo);
+	public void delete(ParametroPersona parametroPersona)throws SQLException;
 }

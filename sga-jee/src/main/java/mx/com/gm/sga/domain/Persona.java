@@ -1,7 +1,7 @@
 package mx.com.gm.sga.domain;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,9 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,6 +25,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
+@Table(name="persona")
 @NamedQueries({ @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p ORDER BY p.idPersona") })
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -33,7 +37,10 @@ public class Persona implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_persona")
-	private int idPersona;
+	private Long idPersona;
+
+	@Column(name = "identificacion")
+	private String identificacion;
 
 	@Column(name = "apellido_materno")
 	private String apeMaterno;
@@ -46,20 +53,25 @@ public class Persona implements Serializable {
 	private String nombre;
 
 	private String telefono;
+	
+	@XmlTransient
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "id_par_per_genero")
+	private ParametroPersona genero;
 
 	@XmlTransient
 	@LazyCollection(LazyCollectionOption.EXTRA)
 	@OneToMany(mappedBy = "persona", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
-	private Set<Usuario> usuarios;
+	private List<Usuario> usuarios;
 
 	public Persona() {
 	}
 
-	public Persona(int idPersona) {
+	public Persona(Long idPersona) {
 		this.idPersona = idPersona;
 	}
 
-	public Persona(int idPersona, String nombre, String apePaterno,
+	public Persona(Long idPersona, String nombre, String apePaterno,
 			String apeMaterno, String email, String telefono) {
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -78,11 +90,11 @@ public class Persona implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public int getIdPersona() {
+	public Long getIdPersona() {
 		return this.idPersona;
 	}
 
-	public void setIdPersona(int idPersona) {
+	public void setIdPersona(Long idPersona) {
 		this.idPersona = idPersona;
 	}
 
@@ -126,28 +138,28 @@ public class Persona implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public Set<Usuario> getUsuarios() {
-		return this.usuarios;
+	public String getIdentificacion() {
+		return identificacion;
 	}
 
-	public void setUsuarios(Set<Usuario> usuarios) {
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	public ParametroPersona getGenero() {
+		return genero;
+	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((apeMaterno == null) ? 0 : apeMaterno.hashCode());
-		result = prime * result
-				+ ((apePaterno == null) ? 0 : apePaterno.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + idPersona;
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result
-				+ ((telefono == null) ? 0 : telefono.hashCode());
-		return result;
+	public void setGenero(ParametroPersona genero) {
+		this.genero = genero;
 	}
 
 	@Override

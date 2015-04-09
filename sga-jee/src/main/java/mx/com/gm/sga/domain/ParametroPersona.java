@@ -1,7 +1,12 @@
 package mx.com.gm.sga.domain;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 /**
@@ -10,7 +15,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="parametro_persona")
-@NamedQuery(name="ParametroPersona.findAll", query="SELECT p FROM ParametroPersona p")
+@NamedQueries({ 
+	@NamedQuery(name = "ParametroPersona.findAll", 
+		query = "SELECT pP FROM ParametroPersona pP"),
+	@NamedQuery(name = "ParametroPersona.findByTipo", 
+		query = "SELECT pP FROM ParametroPersona pP "
+			+ "INNER JOIN pP.tipoParametroPersona as pPtPP "
+			+ "WHERE pPtPP.id = :idTipoParametroPersona") 
+})
 public class ParametroPersona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +43,10 @@ public class ParametroPersona implements Serializable {
 	@ManyToOne(cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
 	@JoinColumn(name="id_tipo_parametro_persona", nullable=false)
 	private TipoParametroPersona tipoParametroPersona;
+	
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@OneToMany(mappedBy = "genero", cascade = { CascadeType.ALL },fetch=FetchType.LAZY)
+	private List<Persona> personas;
 
 	public ParametroPersona() {
 	}
@@ -73,6 +89,14 @@ public class ParametroPersona implements Serializable {
 
 	public void setTipoParametroPersona(TipoParametroPersona tipoParametroPersona) {
 		this.tipoParametroPersona = tipoParametroPersona;
+	}
+
+	public List<Persona> getPersonas() {
+		return personas;
+	}
+
+	public void setPersonas(List<Persona> personas) {
+		this.personas = personas;
 	}
 
 }

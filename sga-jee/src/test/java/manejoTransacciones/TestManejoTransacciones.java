@@ -31,7 +31,7 @@ public class TestManejoTransacciones {
 		assertTrue(personaService != null);
 		
 		//Buscamos un objeto persona
-		Persona persona1 = personaService.encontrarPersonaPorId(new Persona(1));
+		Persona persona1 = personaService.encontrarPersonaPorId(new Persona((long) 1));
 		
 		//Cambiamos la persona
 		//persona1.setApeMaterno("Cambio con error....................................................................");

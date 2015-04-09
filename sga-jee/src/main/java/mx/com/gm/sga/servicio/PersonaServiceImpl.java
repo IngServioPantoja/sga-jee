@@ -12,8 +12,8 @@ import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-
 import javax.xml.ws.WebServiceContext;
+
 import mx.com.gm.sga.domain.Persona;
 import mx.com.gm.sga.domain.Usuario;
 import mx.com.gm.sga.eis.PersonaDao;
@@ -81,6 +81,9 @@ public class PersonaServiceImpl implements PersonaServiceRemote, PersonaService,
 
 	}
 	
+	public boolean encontrarCedula(String cedula)throws SQLException{
+		return personaDao.encontrarCedula(cedula);
+	}
 
 	public Persona encontrarPersonaPorId(Persona persona) {
 		return personaDao.findPersonaById(persona);

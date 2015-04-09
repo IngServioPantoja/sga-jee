@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import mx.com.gm.sga.domain.ParametroPersona;
 
+@Stateless
 public class ParametroPersonaDaoImpl implements ParametroPersonaDao,
 		Serializable {
 
@@ -26,7 +30,15 @@ public class ParametroPersonaDaoImpl implements ParametroPersonaDao,
 			ParametroPersona parametroPersona)throws SQLException {
 		return em.find(ParametroPersona.class, parametroPersona.getId());
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<ParametroPersona> findByTipo(Long idTipo)throws SQLException{
+		Query query = em.createNamedQuery("ParametroPersona.findByTipo");
+		query.setParameter("idTipoParametroPersona", idTipo);
+		List<ParametroPersona> lstParametrosPersona =  query.getResultList(); 
+		return lstParametrosPersona;
+	}
+	
 	public void persist(ParametroPersona parametroPersona)throws SQLException {
 		em.persist(parametroPersona);
 	}
